@@ -20,6 +20,7 @@ import {
 import { useState } from "react";
 import { Sidebar, SidebarBody, SidebarLink } from "../ui/sidebar";
 import { IconMenu2 } from "@tabler/icons-react";
+import { ApiToggleBtn } from "../ui/apiToggleBtn";
 
 export default function Layout() {
   const [isOpen, setIsOpen] = useState(false);
@@ -43,6 +44,7 @@ export default function Layout() {
               { name: "Profile", link: "/profile" },
             ]}
           />
+          <ApiToggleBtn />
           <div className="flex gap-4">
             <ThemeToggle />
             <SignedOut>
