@@ -1,14 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./app";
 import { ClerkProvider } from "@clerk/clerk-react";
+import { RouterProvider } from "@tanstack/react-router";
+import { router } from "./router";
 
 const clerkFrontendApi = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <ClerkProvider publishableKey={clerkFrontendApi}>
-      <App />
+      <RouterProvider router={router} />
     </ClerkProvider>
   </React.StrictMode>
 );
