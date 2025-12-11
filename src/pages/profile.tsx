@@ -1,7 +1,7 @@
 import { SignedIn, SignedOut, SignInButton, useAuth } from "@clerk/clerk-react";
-import { useApi } from "../api/api";
 import type { Product } from "../types/types";
 import { toast } from "react-toastify";
+import { useApi } from "../components/hooks/api/useApi";
 
 export default function Profile() {
   const { post } = useApi();

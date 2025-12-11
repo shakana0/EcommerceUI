@@ -1,8 +1,8 @@
 import { useParams } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import type { ProductData } from "../types/types";
-import { useApi } from "../api/api";
 import { productRoute } from "../router";
+import { useApi } from "../components/hooks/api/useApi";
 
 export default function Product() {
   const { productId } = useParams({ from: productRoute.id });
