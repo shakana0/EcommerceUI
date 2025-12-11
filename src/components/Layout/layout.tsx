@@ -39,11 +39,11 @@ export default function Layout() {
           <NavItems
             items={[
               { name: "Home", link: "/" },
-              { name: "Profile", link: "/profile" },
               { name: "Categories", link: "/categories" },
+              { name: "Profile", link: "/profile" },
             ]}
           />
-          <div className="flex gap-4 items-end">
+          <div className="flex gap-4">
             <ThemeToggle />
             <SignedOut>
               <SignInButton />
@@ -76,7 +76,7 @@ export default function Layout() {
       </Navbar>
 
       <div className="flex flex-1">
-        <Sidebar>
+        <Sidebar className="hidden md:flex">
           <SidebarBody className="min-h-screen gap-6">
             <SidebarLink
               link={{
