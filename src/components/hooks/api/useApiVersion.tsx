@@ -1,0 +1,14 @@
+import { useState, useEffect } from "react";
+
+export const useApiVersion = () => {
+  const [version, setVersion] = useState<"dev" | "prod">("dev");
+
+  useEffect(() => {
+    const stored = localStorage.getItem("apiVersion");
+    if (stored === "prod" || stored === "dev") {
+      setVersion(stored);
+    }
+  }, []);
+
+  return version;
+};
