@@ -1,18 +1,18 @@
 import { useEffect, useState } from "react";
-import { getProducts } from "../api/api";
 import type { ProductData } from "../types/types";
 import { CometCard } from "../components/ui/comet-card";
-import { Link, Outlet } from "@tanstack/react-router";
+import { Link } from "@tanstack/react-router";
 import { productRoute } from "../router";
-import { div } from "motion/react-client";
+import { useApi } from "../components/hooks/api/useApi";
 
 export default function ProductList() {
   const [products, setProducts] = useState<Array<ProductData>>([]);
+  const { get } = useApi();
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const data = await getProducts();
+        const data = await get();
         setProducts(data);
       } catch (error) {
         console.error(error);
