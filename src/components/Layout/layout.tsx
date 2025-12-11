@@ -1,3 +1,4 @@
+import "../../index.css";
 import { Link, Outlet } from "@tanstack/react-router";
 import {
   MobileNav,
@@ -37,9 +38,9 @@ export default function Layout() {
           </Link>
           <NavItems
             items={[
-              { name: "Catalog", link: "/catalog" },
+              { name: "Home", link: "/" },
               { name: "Profile", link: "/profile" },
-              { name: "Cart", link: "/cart" },
+              { name: "Categories", link: "/categories" },
             ]}
           />
           <div className="flex gap-4 items-end">
