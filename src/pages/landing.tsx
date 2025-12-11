@@ -2,9 +2,10 @@ import ProductList from "./productList";
 
 export default function Landing() {
   return (
-    <div className="p-8">
-      <h1 className="text-3xl font-bold">Welcome to Product Catalog</h1>
-      <p>This is the public landing page.</p>
+    <div>
+      <h1 className="sm:text-xl lg:text-3xl font-bold text-center">
+        Welcome to Product Catalog
+      </h1>
       <h1>Products</h1>
       <ProductList />
     </div>
