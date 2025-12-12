@@ -1,31 +1,27 @@
-import { useEffect, useState } from "react";
 import type { ProductData } from "../types/types";
 import { CometCard } from "../components/ui/comet-card";
 import { Link } from "@tanstack/react-router";
 import { productRoute } from "../router";
-import { useApi } from "../components/hooks/api/useApi";
+import { useApiQueries } from "../components/hooks/queries/useApiQueries";
+import { ProductCardSkeleton } from "../components/ui/ProductCardSkeleton";
 
 export default function ProductList() {
-  const [products, setProducts] = useState<Array<ProductData>>([]);
-  const { get } = useApi();
+  const { productsQuery } = useApiQueries();
 
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const data = await get();
-        setProducts(data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    fetchProducts();
-  }, []);
+  if (productsQuery.isLoading)
+    return (
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        {Array.from({ length: 6 }).map((_, i) => (
+          <ProductCardSkeleton key={i} />
+        ))}
+      </div>
+    );
+  if (productsQuery.error) return <p>Error loading products</p>;
 
   return (
-    <div className="flex justify-center items-center min-h-screen">
+    <div className="flex justify-center items-center min-h-screen pt-4">
       <ul className="product-list grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
-        {products.map((p: ProductData) => (
+        {productsQuery.data.map((p: ProductData) => (
           <li key={p.id}>
             <Link to={productRoute.id} params={{ productId: p.id.toString() }}>
               <CometCard>
