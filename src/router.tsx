@@ -6,11 +6,28 @@ import ProductList from "./pages/productList";
 import Product from "./pages/product";
 import CategoryList from "./pages/categoryList";
 import Profile from "./pages/profile";
-import { useAuth } from "@clerk/clerk-react";
+import { useAuth, useUser } from "@clerk/clerk-react";
 
 function Protected({ children }: { children: React.ReactNode }) {
   const { isSignedIn } = useAuth();
-  if (!isSignedIn) return <div>Please sign in to access this page.</div>;
+  const { user, isLoaded } = useUser();
+
+  if (!isLoaded) {
+    return <div className="text-center text-gray-400">Loading...</div>;
+  }
+
+  if (!isSignedIn) {
+    return <div>Please sign in to access this page.</div>;
+  }
+
+  const isAdmin = user?.organizationMemberships?.some(
+    (m) => m.role === "org:admin"
+  );
+
+  if (!isAdmin) {
+    return <div>Access denied. Admins only.</div>;
+  }
+
   return <>{children}</>;
 }
 
