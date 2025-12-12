@@ -47,8 +47,8 @@ export default function Layout() {
             ProductCatalog
           </Link>
           <NavItems items={navItems} />
-          <ApiToggleBtn />
           <div className="flex gap-4">
+            <ApiToggleBtn />
             <ThemeToggle />
             <SignedOut>
               <SignInButton />
