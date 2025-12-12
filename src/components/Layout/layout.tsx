@@ -20,7 +20,13 @@ import {
 } from "@clerk/clerk-react";
 import { useState } from "react";
 import { Sidebar, SidebarBody, SidebarLink } from "../ui/sidebar";
-import { IconMenu2 } from "@tabler/icons-react";
+import {
+  IconBulb,
+  IconDeviceDesktop,
+  IconDeviceMobile,
+  IconHeadphones,
+  IconKeyboard,
+} from "@tabler/icons-react";
 import { ApiToggleBtn } from "../ui/apiToggleBtn";
 
 export default function Layout() {
@@ -87,37 +93,37 @@ export default function Layout() {
           <SidebarBody className="min-h-screen gap-6">
             <SidebarLink
               link={{
-                label: "Fruits & Berries",
-                href: "/categories/fruits",
-                icon: <IconMenu2 />,
+                label: "Gaming Computers",
+                href: "/categories/gaming-computers",
+                icon: <IconDeviceDesktop />,
               }}
             />
             <SidebarLink
               link={{
-                label: "Vegetables",
-                href: "/categories/vegetables",
-                icon: <IconMenu2 />,
+                label: "Headphones & Audio",
+                href: "/categories/headphones-audio",
+                icon: <IconHeadphones />,
               }}
             />
             <SidebarLink
               link={{
-                label: "Dairy Products",
-                href: "/categories/dairy",
-                icon: <IconMenu2 />,
+                label: "Smart Home Devices",
+                href: "/categories/smart-home-devices",
+                icon: <IconBulb />,
               }}
             />
             <SidebarLink
               link={{
-                label: "Meat & Poultry",
-                href: "/categories/meat",
-                icon: <IconMenu2 />,
+                label: "Mobile Accessories",
+                href: "/categories/mobile-accessories",
+                icon: <IconDeviceMobile />,
               }}
             />
             <SidebarLink
               link={{
-                label: "Bakery & Bread",
-                href: "/categories/bakery",
-                icon: <IconMenu2 />,
+                label: "Computer Peripherals",
+                href: "/categories/computer-peripherals",
+                icon: <IconKeyboard />,
               }}
             />
           </SidebarBody>
