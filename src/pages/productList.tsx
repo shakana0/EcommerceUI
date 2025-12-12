@@ -20,7 +20,7 @@ export default function ProductList() {
 
   return (
     <div className="flex justify-center items-center min-h-screen pt-4">
-      <ul className="product-list grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+      <ul className="product-list grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 lg:gap-16 gap-6 mt-6">
         {productsQuery.data.map((p: ProductData) => (
           <li key={p.id}>
             <Link to={productRoute.id} params={{ productId: p.id.toString() }}>
