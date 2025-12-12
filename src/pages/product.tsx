@@ -1,25 +1,12 @@
 import { useParams } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
-import type { ProductData } from "../types/types";
 import { productRoute } from "../router";
-import { useApi } from "../components/hooks/api/useApi";
+import { useQueryClient } from "@tanstack/react-query";
 
 export default function Product() {
+  const queryClient = useQueryClient();
   const { productId } = useParams({ from: productRoute.id });
-  const { getById } = useApi();
-  const [product, setProduct] = useState<ProductData | null>(null);
-
-  useEffect(() => {
-    const fetchProduct = async () => {
-      try {
-        const result = await getById(`/Products/${productId}`);
-        setProduct(result);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    fetchProduct();
-  }, [productId]);
+  const products = queryClient.getQueryData<any[]>(["products"]);
+  const product = products?.find((p) => p.id === Number(productId));
 
   if (!product) {
     return (
