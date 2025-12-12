@@ -19,7 +19,7 @@ export function useApi() {
   }
 
   async function get() {
-    const response = await fetch(`${apiBase}/products`);
+    const response = await fetch(`${apiBase}/Products`);
     if (!response.ok) throw new Error("Failed to fetch products");
     return response.json();
   }
