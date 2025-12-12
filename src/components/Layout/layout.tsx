@@ -15,6 +15,7 @@ import {
   SignedIn,
   SignedOut,
   SignInButton,
+  useAuth,
   UserButton,
 } from "@clerk/clerk-react";
 import { useState } from "react";
@@ -29,6 +30,14 @@ export default function Layout() {
     setIsOpen((prev) => !prev);
   };
 
+  const { isSignedIn } = useAuth();
+
+  const navItems = [
+    { name: "Home", link: "/" },
+    { name: "Categories", link: "/categories" },
+    ...(isSignedIn ? [{ name: "Profile", link: "/profile" }] : []), // 🔒 lägg till bara om SignedIn
+  ];
+
   return (
     <div className="min-h-screen flex flex-col bg-background text-foreground text-black dark:bg-black dark:text-white">
       <Navbar>
@@ -37,13 +46,7 @@ export default function Layout() {
           <Link to="/" className="text-xl font-bold">
             ProductCatalog
           </Link>
-          <NavItems
-            items={[
-              { name: "Home", link: "/" },
-              { name: "Categories", link: "/categories" },
-              { name: "Profile", link: "/profile" },
-            ]}
-          />
+          <NavItems items={navItems} />
           <ApiToggleBtn />
           <div className="flex gap-4">
             <ThemeToggle />
@@ -65,7 +68,9 @@ export default function Layout() {
           <MobileNavMenu isOpen={isOpen} onClose={toggleMenu}>
             <a href="/">Home</a>
             <a href="/categories">Categories</a>
-            <a href="/profile">Profile</a>
+            <SignedIn>
+              <a href="/profile">Profile</a>
+            </SignedIn>
             <ThemeToggle />
             <SignedOut>
               <SignInButton />
