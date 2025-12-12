@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 
 export const useApiVersion = () => {
-  const [version, setVersion] = useState<"dev" | "prod">("dev");
+  const [version, setVersion] = useState<"dev" | "prod">(
+    (localStorage.getItem("apiVersion") as "dev" | "prod") || "prod"
+  );
 
   useEffect(() => {
     const stored = localStorage.getItem("apiVersion");
