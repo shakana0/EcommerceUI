@@ -63,9 +63,9 @@ export default function Layout() {
             <MobileNavToggle isOpen={isOpen} onClick={toggleMenu} />
           </MobileNavHeader>
           <MobileNavMenu isOpen={isOpen} onClose={toggleMenu}>
-            <a href="/catalog">Catalog</a>
+            <a href="/">Home</a>
+            <a href="/categories">Categories</a>
             <a href="/profile">Profile</a>
-            <a href="/cart">Cart</a>
             <ThemeToggle />
             <SignedOut>
               <SignInButton />
