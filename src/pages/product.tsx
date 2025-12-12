@@ -61,7 +61,7 @@ export default function Product() {
           </div>
 
           <button className="w-full md:w-auto cursor-pointer px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-lg">
-            Add to Cart
+            Edit ✏️
           </button>
         </div>
       </section>
