@@ -1,14 +1,21 @@
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useApi } from "../api/useApi";
 
 export function useApiQueries() {
-  const { get, getById, post, put, del } = useApi();
+  const { getProducts, getAllProducts, getById, post, put, del } = useApi();
   const queryClient = useQueryClient();
 
-  const productsQuery = useQuery({
-    queryKey: ["products"],
-    queryFn: () => get(),
-  });
+  const productsQuery = (page: number, pageSize: number) =>
+    useQuery({
+      queryKey: ["products", page, pageSize],
+      queryFn: () => getProducts(page, pageSize),
+    });
+
+  const allProductsQuery = () =>
+    useQuery({
+      queryKey: ["products"],
+      queryFn: () => getAllProducts(),
+    });
 
   const productQuery = (id: string) =>
     useQuery({
@@ -18,28 +25,29 @@ export function useApiQueries() {
     });
 
   const createProduct = useMutation({
-    mutationFn: (newProduct: any) => post("Products", "", newProduct),
+    mutationFn: (newProduct: any) => post("Products", newProduct),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["products"] });
+      queryClient.invalidateQueries({ queryKey: ["products"], exact: false });
     },
   });
 
   const updateProduct = useMutation({
     mutationFn: (product: any) => put(`Products/${product.id}`, product),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["products"] });
+      queryClient.invalidateQueries({ queryKey: ["products"], exact: false });
     },
   });
 
   const deleteProduct = useMutation({
     mutationFn: (id: string) => del(`Products/${id}`),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["products"] });
+      queryClient.invalidateQueries({ queryKey: ["products"], exact: false });
     },
   });
 
   return {
     productsQuery,
+    allProductsQuery,
     productQuery,
     createProduct,
     updateProduct,
