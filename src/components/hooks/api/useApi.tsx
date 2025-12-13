@@ -1,5 +1,6 @@
 import { useAuth } from "@clerk/clerk-react";
 import { useApiBase } from "./useApiBase";
+import type { PagedResult, ProductData } from "../../../types/types";
 
 export function useApi() {
   const { getToken } = useAuth();
@@ -7,8 +8,7 @@ export function useApi() {
 
   async function request(path: string, options: RequestInit = {}) {
     const token = await getToken({ template: "ecom-jwt-template" });
-
-    return fetch(`${apiBase}/${path}`, {
+    const response = await fetch(`${apiBase}/${path}`, {
       ...options,
       headers: {
         ...options.headers,
@@ -16,50 +16,42 @@ export function useApi() {
         "Content-Type": "application/json",
       },
     });
-  }
 
-  async function get() {
-    const response = await fetch(`${apiBase}/Products`);
-    if (!response.ok) throw new Error("Failed to fetch products");
+    if (!response.ok) throw new Error("API request failed");
     return response.json();
   }
 
-  async function getById(path: string) {
-    console.log(path);
-    const res = await request(path, { method: "GET" });
-    console.log(res);
-    if (!res.ok) throw new Error(`GET failed: ${res.status}`);
-    return res.json();
+  async function getProducts(page: number, pageSize: number) {
+    return request(`Products?page=${page}&pageSize=${pageSize}`);
   }
 
-  async function post(path: string, token: string, body: any) {
-    const res = await request(path, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify(body),
-    });
+  async function getAllProducts(): Promise<PagedResult<ProductData>> {
+    const items: ProductData[] = await request("Products");
 
-    if (!res.ok) throw new Error(`POST failed: ${res.status}`);
-    return res.json();
+    return {
+      items,
+      totalCount: items.length,
+      page: 1,
+      pageSize: items.length,
+      totalPages: 1,
+    };
+  }
+
+  async function getById(path: string) {
+    return request(path);
+  }
+
+  async function post(path: string, body: any) {
+    return request(path, { method: "POST", body: JSON.stringify(body) });
   }
 
   async function put(path: string, body: any) {
-    const res = await request(path, {
-      method: "PUT",
-      body: JSON.stringify(body),
-    });
-    if (!res.ok) throw new Error(`PUT failed: ${res.status}`);
-    return res.json();
+    return request(path, { method: "PUT", body: JSON.stringify(body) });
   }
 
   async function del(path: string) {
-    const res = await request(path, { method: "DELETE" });
-    if (!res.ok) throw new Error(`DELETE failed: ${res.status}`);
-    return res.json();
+    return request(path, { method: "DELETE" });
   }
 
-  return { get, getById, post, put, del };
+  return { getProducts, getAllProducts, getById, post, put, del };
 }
