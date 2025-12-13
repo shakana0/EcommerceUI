@@ -1,8 +1,7 @@
 import { useApiVersion } from "./useApiVersion";
 
-const PROD_API_URL =
-  "https://ecommerceapi-cnhvepg9gkgrg3et.swedencentral-01.azurewebsites.net/api/";
-const DEV_API_URL = "https://localhost:5001";
+const PROD_API_URL = import.meta.env.VITE_PROD_API_URL;
+const DEV_API_URL = import.meta.env.VITE_DEV_API_URL;
 
 export const useApiBase = () => {
   const version = useApiVersion();
