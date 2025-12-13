@@ -13,6 +13,8 @@ export const ApiToggleBtn = () => {
     const newVersion = isProd ? "dev" : "prod";
     localStorage.setItem("apiVersion", newVersion);
     setIsProd(newVersion === "prod");
+
+    window.location.reload();
   };
 
   return (
