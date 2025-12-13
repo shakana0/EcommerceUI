@@ -28,6 +28,7 @@ import {
   IconKeyboard,
 } from "@tabler/icons-react";
 import { ApiToggleBtn } from "../ui/apiToggleBtn";
+import { BackButton } from "../ui/backButton";
 
 export default function Layout() {
   const [isOpen, setIsOpen] = useState(false);
@@ -130,7 +131,9 @@ export default function Layout() {
         </Sidebar>
 
         {/* Main content */}
-        <main className="flex-1 p-6">
+        <main className="flex-1 p-6 pt-10">
+          <BackButton />
+
           <Outlet />
         </main>
       </div>
