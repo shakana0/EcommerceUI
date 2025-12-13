@@ -51,9 +51,15 @@ export const productRoute = new Route({
   component: Product,
 });
 
-const categoryRoute = new Route({
+const categoriesRoute = new Route({
   getParentRoute: () => rootRoute,
   path: "/categories",
+  component: CategoryList,
+});
+
+const categoryRoute = new Route({
+  getParentRoute: () => rootRoute,
+  path: "/categories/$categoryName",
   component: CategoryList,
 });
 
@@ -71,6 +77,7 @@ const routeTree = rootRoute.addChildren([
   landingRoute,
   productListRoute,
   productRoute,
+  categoriesRoute,
   categoryRoute,
   profileRoute,
 ]);
