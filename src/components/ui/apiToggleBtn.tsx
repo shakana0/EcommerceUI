@@ -20,7 +20,7 @@ export const ApiToggleBtn = () => {
   return (
     <button
       onClick={toggleVersion}
-      className={`w-16 h-8 rounded-full relative transition-colors duration-300 ${
+      className={`w-16 h-8 rounded-full relative transition-colors duration-300 cursor-pointer ${
         isProd ? "bg-green-500" : "bg-gray-700"
       }`}
     >
