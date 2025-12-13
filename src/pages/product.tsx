@@ -1,12 +1,17 @@
 import { useParams } from "@tanstack/react-router";
 import { productRoute } from "../router";
 import { useQueryClient } from "@tanstack/react-query";
+import type { ProductData } from "../types/types";
 
 export default function Product() {
   const queryClient = useQueryClient();
   const { productId } = useParams({ from: productRoute.id });
-  const products = queryClient.getQueryData<any[]>(["products"]);
-  const product = products?.find((p) => p.id === Number(productId));
+
+  const allPages = queryClient.getQueriesData<{ items: ProductData[] }>({
+    queryKey: ["products"],
+  });
+  const allItems = allPages.flatMap(([, data]) => data?.items ?? []);
+  const product = allItems.find((p) => p.id === Number(productId));
 
   if (!product) {
     return (
@@ -46,6 +51,9 @@ export default function Product() {
               </span>
             </div>
           </div>
+          <p className="text-sm text-gray-300 mb-4 mt-2">
+            {product.description}
+          </p>
 
           <button className="w-full md:w-auto cursor-pointer px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-lg">
             Edit ✏️
