@@ -41,7 +41,7 @@ export default function Layout() {
   const navItems = [
     { name: "Home", link: "/" },
     { name: "Categories", link: "/categories" },
-    ...(isSignedIn ? [{ name: "Profile", link: "/profile" }] : []), // 🔒 lägg till bara om SignedIn
+    ...(isSignedIn ? [{ name: "Profile", link: "/profile" }] : []),
   ];
 
   return (
