@@ -3,7 +3,7 @@ import { ProductForm } from "../components/ui/ProductForm";
 
 export default function Profile() {
   return (
-    <>
+    <div className="min-h-screen flex flex-col">
       <div className="pb-8">
         <SignedIn>
           <h1 className="sm:text-xl lg:text-3xl font-bold text-center">
@@ -11,12 +11,18 @@ export default function Profile() {
           </h1>
         </SignedIn>
         <SignedOut>
-          <p>You must sign in to view your profile.</p>
-          <SignInButton />
+          <p className="text-center">You must sign in to view your profile.</p>
+          <div className="flex justify-center mt-4">
+            <SignInButton />
+          </div>
         </SignedOut>
       </div>
 
-      <ProductForm />
-    </>
+      <div className="flex justify-center pt-12">
+        <div className="w-full max-w-md">
+          <ProductForm />
+        </div>
+      </div>
+    </div>
   );
 }
