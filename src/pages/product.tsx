@@ -21,7 +21,7 @@ export default function Product() {
 
   return (
     <>
-      <div className="px-8 mx-auto px-8 py-16 grid gap-24">
+      <div className="px-8 mx-auto pt-16 pb-6 grid gap-24">
         <section className="text-center">
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
             {product.name}
