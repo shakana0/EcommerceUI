@@ -1,6 +1,6 @@
 import { Link, useParams } from "@tanstack/react-router";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import ScrollToTopButton from "../components/ui/ScrollToTopButton";
+import ScrollToTopButton from "../components/ui/scrollToTopButton";
 import { CometCard } from "../components/ui/comet-card";
 import type { PagedResult, ProductData } from "../types/types";
 import { useApi } from "../components/hooks/api/useApi";
@@ -23,6 +23,10 @@ export default function CategoryList() {
 
   const words = categoryName?.toLowerCase().split("-") ?? [];
 
+  const formattedCategory = words
+    .map((w: string) => w.charAt(0).toUpperCase() + w.slice(1))
+    .join(" ");
+
   const filtered = categoryName
     ? products?.items.filter((p) => {
         const cat = p.category.name.toLowerCase();
@@ -33,12 +37,12 @@ export default function CategoryList() {
   console.log(filtered);
 
   return (
-    <div className="min-h-screen pt-4">
-      <h1 className="text-2xl font-bold text-center my-6">
-        {categoryName ? `Category: ${categoryName}` : "All Products"}
+    <div className="min-h-screen pt-4 flex justify-center items-center flex-col md:justify-start">
+      <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-center my-6">
+        {categoryName ? `Category: ${formattedCategory}` : "All Products"}
       </h1>
 
-      <ul className="category-list grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 lg:gap-16 gap-6 mt-6">
+      <ul className="category-list grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 lg:gap-16 gap-6 pt-16">
         {filtered?.map((p) => (
           <li key={p.id}>
             <Link
@@ -64,14 +68,17 @@ export default function CategoryList() {
         ))}
       </ul>
 
-      <div className="flex flex-col items-center gap-4 mt-6">
+      <div className="flex flex-col items-center gap-4 mt-6 lg:mt-10">
         <p className="text-gray-400 text-sm">
           Showing{" "}
           <span className="font-semibold text-white">
             {filtered?.length ?? 0}
           </span>{" "}
           {categoryName ? "products in category" : "products total"}{" "}
-          <span className="font-semibold text-white">{categoryName ?? ""}</span>
+          <span className="font-semibold text-white">
+            {" "}
+            {categoryName ? `Category: ${formattedCategory}` : "All Products"}
+          </span>
         </p>
       </div>
 
