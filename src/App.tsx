@@ -4,7 +4,6 @@ import {
   RouterProvider,
   createRouter,
   createRootRoute,
-  createRoute,
 } from "@tanstack/react-router";
 
 import Layout from "./components/Layout/layout";
