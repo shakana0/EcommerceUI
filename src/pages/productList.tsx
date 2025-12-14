@@ -5,9 +5,9 @@ import { productRoute } from "../router";
 import { useApiQueries } from "../components/hooks/queries/useApiQueries";
 import { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
-import { ProductCardSkeleton } from "../components/ui/ProductCardSkeleton";
 import { useApiVersion } from "../components/hooks/api/useApiVersion";
-import ScrollToTopButton from "../components/ui/ScrollToTopButton";
+import ScrollToTopButton from "../components/ui/scrollToTopButton";
+import { ProductCardSkeleton } from "../components/ui/productCardSkeleton";
 
 export default function ProductList() {
   const { productsQuery, allProductsQuery } = useApiQueries();
@@ -31,8 +31,8 @@ export default function ProductList() {
   if (query.error) return <p>Error loading products</p>;
 
   return (
-    <div className="flex justify-center items-center flex-col min-h-screen pt-4">
-      <ul className="product-list grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 lg:gap-16 gap-6 mt-6">
+    <div className="flex justify-center lg:justify-start items-center flex-col min-h-screen pt-16 pb-10">
+      <ul className="product-list grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 lg:gap-16 gap-6 mt-6">
         {query.data.items?.map((p: ProductData) => (
           <li key={p.id}>
             <Link
@@ -57,7 +57,7 @@ export default function ProductList() {
           </li>
         ))}
       </ul>
-      <div className="flex flex-col items-center gap-4 mt-6">
+      <div className="flex flex-col items-center gap-4 mt-10">
         <div className="flex gap-4 justify-center">
           <button
             disabled={page === 1}
