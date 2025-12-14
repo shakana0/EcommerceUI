@@ -1,5 +1,5 @@
 import { SignedIn, SignedOut, SignInButton } from "@clerk/clerk-react";
-import { ProductForm } from "../components/ui/ProductForm";
+import { ProductForm } from "../components/ui/productForm";
 
 export default function Profile() {
   return (
