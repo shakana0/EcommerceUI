@@ -89,7 +89,7 @@ export const ProductForm = () => {
         {errors.name && <p className="text-red-400 text-sm">{errors.name}</p>}
       </div>
 
-      {/* Description */}
+      {/* Description*/}
       <div>
         <label className="block text-sm font-medium text-gray-300">
           Description
