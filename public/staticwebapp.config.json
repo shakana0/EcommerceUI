@@ -1,8 +1,24 @@
 {
-  "routes": [
-    {
-      "route": "/*",
-      "rewrite": "/index.html"
-    }
-  ]
+  "navigationFallback": {
+    "rewrite": "/index.html",
+    "exclude": [
+      "/assets/*",
+      "/*.css",
+      "/*.js",
+      "/*.ico",
+      "/*.png",
+      "/*.jpg",
+      "/*.jpeg",
+      "/*.gif",
+      "/*.svg",
+      "/*.woff",
+      "/*.woff2",
+      "/*.ttf",
+      "/*.eot"
+    ]
+  },
+  "mimeTypes": {
+    ".json": "text/json",
+    ".webmanifest": "application/manifest+json"
+  }
 }
