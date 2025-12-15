@@ -42,7 +42,7 @@ export default function Layout() {
   const navItems = [
     { name: "Home", link: "/" },
     { name: "Categories", link: "/categories" },
-    ...(isSignedIn ? [{ name: "Profile", link: "/profile" }] : []),
+    ...(isSignedIn ? [{ name: "Admin", link: "/admin" }] : []),
   ];
 
   return (
@@ -55,7 +55,11 @@ export default function Layout() {
           </Link>
           <NavItems items={navItems} />
           <div className="flex gap-4">
-            <ApiToggleBtn />
+            <div className="flex items-end gap-2 mr-4">
+              <ApiToggleBtn />
+              <span className="text-gray-400 text-sm">Prod</span>
+            </div>
+
             <ThemeToggle />
             <SignedOut>
               <SignInButton />

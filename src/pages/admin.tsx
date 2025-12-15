@@ -1,13 +1,13 @@
 import { SignedIn, SignedOut, SignInButton } from "@clerk/clerk-react";
 import { ProductForm } from "../components/ui/productForm";
 
-export default function Profile() {
+export default function Admin() {
   return (
     <div className="min-h-screen flex flex-col">
       <div className="pb-8">
         <SignedIn>
           <h1 className="sm:text-xl lg:text-3xl font-bold text-center">
-            Profile
+            Admin
           </h1>
         </SignedIn>
         <SignedOut>

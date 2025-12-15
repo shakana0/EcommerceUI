@@ -5,8 +5,8 @@ import Landing from "./pages/landing";
 import ProductList from "./pages/productList";
 import Product from "./pages/product";
 import CategoryList from "./pages/categoryList";
-import Profile from "./pages/profile";
 import { useAuth, useUser } from "@clerk/clerk-react";
+import Admin from "./pages/admin";
 
 function Protected({ children }: { children: React.ReactNode }) {
   const { isSignedIn } = useAuth();
@@ -65,10 +65,10 @@ const categoryRoute = new Route({
 
 const profileRoute = new Route({
   getParentRoute: () => rootRoute,
-  path: "/profile",
+  path: "/admin",
   component: () => (
     <Protected>
-      <Profile />
+      <Admin />
     </Protected>
   ),
 });

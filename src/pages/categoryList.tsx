@@ -34,8 +34,6 @@ export default function CategoryList() {
       })
     : products?.items;
 
-  console.log(filtered);
-
   return (
     <div className="min-h-screen pt-4 flex justify-center items-center flex-col md:justify-start">
       <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-center my-6">
